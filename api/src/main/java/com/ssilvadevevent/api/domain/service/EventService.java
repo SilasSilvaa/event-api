@@ -7,6 +7,7 @@ import com.ssilvadevevent.api.domain.event.EventDetailsDTO;
 import com.ssilvadevevent.api.domain.event.EventRequestDTO;
 import com.ssilvadevevent.api.domain.event.EventResponseDTO;
 import com.ssilvadevevent.api.repositories.EventRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -68,7 +69,7 @@ public class EventService {
     }
 
     public EventDetailsDTO getEventById(UUID eventId){
-        Event event = repository.findById(eventId).orElseThrow(() -> new IllegalArgumentException("Event not found"));
+        Event event = repository.findById(eventId).orElseThrow(() -> new EntityNotFoundException("Event not found"));
         Optional<Address> address = addressService.findByEventId(eventId);
 
         List<Coupon> coupons = couponService.consultCoupons(eventId, new Date());
@@ -93,7 +94,7 @@ public class EventService {
     }
 
     public ResponseEntity<Event> deleteEvent(UUID id) {
-        Event event = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Event not found"));
+        Event event = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Event not found"));
         repository.delete(event);
 
         return ResponseEntity.noContent().build();
