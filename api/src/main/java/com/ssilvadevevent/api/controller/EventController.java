@@ -5,6 +5,7 @@ import com.ssilvadevevent.api.domain.event.EventDetailsDTO;
 import com.ssilvadevevent.api.domain.event.EventRequestDTO;
 import com.ssilvadevevent.api.domain.event.EventResponseDTO;
 import com.ssilvadevevent.api.domain.service.EventService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +23,10 @@ public class EventController {
     private EventService eventService;
 
     @PostMapping
-    public ResponseEntity<Event> create(@RequestBody EventRequestDTO data){
-        Event newEvent = this.eventService.createEvent(data);
+    public ResponseEntity<Event> create(@RequestBody @Valid EventRequestDTO data){
+            Event newEvent = this.eventService.createEvent(data);
 
-        return ResponseEntity.ok(newEvent);
+            return ResponseEntity.ok(newEvent);
     }
 
     @GetMapping
