@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.UUID;
 
 public record EventResponseDTO(
-        UUID uuid,
+        UUID id,
         String title,
         String description,
         Date date,
