@@ -1,15 +1,15 @@
 package com.ssilvadevevent.api.domain.event;
-
-import org.springframework.web.multipart.MultipartFile;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record EventRequestDTO(
-        String title,
-        String description,
-        Long date,
+        @NotBlank String title,
+        @NotBlank String description,
+        @NotNull Long date,
         String city,
         String state,
-        Boolean remote,
-        String eventUrl,
-        String imageUrl) {
-
+        @NotNull Boolean remote,
+        @NotBlank String eventUrl,
+        @NotBlank String imageUrl) {
 }
